@@ -3,7 +3,7 @@ export {};
 
 let numArr: number[] = [1, 2, 3]
 let strArr: string[] = ["hello", "im", "yeeun"];
-let boorArr: Arry<boolean> = [true, false];
+let boorArr: Array<boolean> = [true, false];
 
 // 배열에 들어가는 요소들이 다양할 경우
 let multiArr = [1, "hello"];
@@ -27,10 +27,11 @@ const users1 = [
     [5, "조아무개"], // <- 새로 추가함
 ];
 
-const users2: [string, number][] = [
-    ["김예은", 1],
-    ["이아무개", 2],
-    ["김아무개", 3],
-    ["박아무개", 4],
-    [5, "조아무개"], // 오류 발생
-];
+//
+// const users2: [string, number][] = [
+//     ["김예은", 1],
+//     ["이아무개", 2],
+//     ["김아무개", 3],
+//     ["박아무개", 4],
+//     [5, "조아무개"], // 오류 발생
+// ];
