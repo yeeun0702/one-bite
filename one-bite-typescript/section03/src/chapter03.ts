@@ -1,87 +1,60 @@
-/*
-* Unknown 타입
-* */
+// 기본 타입간의 호환성
+let num1: number = 10;
+let num2: 10 = 10;
 
-function unKnownExam(){
-    let a: unknown = 1;                 // number -> unknown
-    let b: unknown = "hello";           // string -> unknown
-    let c: unknown = true;              // boolean -> unknown
-    let d: unknown = null;              // null -> unknown
-    let e: unknown = undefined;         // undefined -> unknown
-    let f: unknown = [];                // Array -> unknown
-    let g: unknown = {};                // Object -> unknown
-    let h: unknown = () => {};    // Function -> unknown
+num1 = num2; // 업 캐스팅
+num2 = num1; // 다운 캐스팅
 
-}
+// 객체 타입간의 호환성
+// -> 어떤 객체 타입을 다른 객체타입으로 취급해도 괜찮은가 ?
+type Animal = {
+    name: string;
+    color: string;
+};
 
+type Dog = {
+    name: string;
+    color: string;
+    breed: string;
+};
 
-let unknownValue: unknown;
+let animal: Animal = {
+    name: "기린",
+    color: "yellow",
+};
 
-// let a: number = unknownValue;
-// 오류 : unknown 타입은 number 타입에 할당할 수 없습니다.
+let dog: Dog = {
+    name: "돌돌이",
+    color: "brown",
+    breed: "진도",
+};
 
-/*
-* Never 타입
-* */
-
-function neverExam(){
-
-    function neverFunc():never {
-        while(true){}
-    }
-
-    function errorFunc(): never {
-        throw new Error();
-    }
-
-    let neverVar: never;
-
-    // 업 캐스팅
-    let a: number = neverVar;            // never -> number
-    let b: string = neverVar;            // never -> string
-    let c: boolean = neverVar;           // never -> boolean
-    let d: null = neverVar;              // never -> null
-    let e: undefined = neverVar;         // never -> undefined
-    let f: [] = neverVar;                // never -> Array
-    let g: {} = neverVar;                // never -> Object
+animal = dog;
+dog = animal; // X
 
 
-    // 다운 캐스팅 불가능
-    // let a: never = 1;                 // number -> never
-    // let b: never = "hello";           // string -> never
-    // let c: never = true;              // boolean -> never
-    // let d: never = null;              // null -> never
-    // let e: never = undefined;         // undefined -> never
-    // let f: never = [];                // Array -> never
-    // let g: never = {};                // Object -> never
+// 초과 프로퍼티 검사
+type Book = {
+    name: string;
+    price: number;
+};
 
-}
+type ProgrammingBook = {
+    name: string;
+    price: number;
+    skill: string;
+};
 
+let book2: Book = { // 오류 발생
+    name: "한 입 크기로 잘라먹는 리액트",
+    price: 33000,
+    skill: "reactjs",
+};
 
-/*
-* Void 타입
-* */
+function func(book: Book) {}
 
-function VoidExam(){
-    function noReturnFunc(): void {
-        console.log("hi");
-    }
-}
-
-
-/*
-* Any 타입
-* */
-
-function AnyExam(){
-    let anyValue: any;
-
-    let num: number = anyValue;   // any -> number (다운 캐스트)
-    let str: string = anyValue;   // any -> string (다운 캐스트)
-    let bool: boolean = anyValue; // any -> boolean (다운 캐스트)
-
-    anyValue = num;  // number -> any (업 캐스트)
-    anyValue = str;  // string -> any (업 캐스트)
-    anyValue = bool; // boolean -> any (업 캐스트)
-
-}
+func({ // 오류 발생
+    name: "한 입 크기로 잘라먹는 리액트",
+    price: 33000,
+    skill: "reactjs",
+});
